@@ -31,16 +31,16 @@ class SignUpViewController: UIViewController {
     }
     
     func styleTextField(textField: UITextField){
+        textField.layer.masksToBounds = true
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
         textField.leftViewMode = .always
-        textField.layer.cornerRadius = 20
-//        textField.layer.shadowRadius = 50
-        textField.layer.borderWidth = 1
-        textField.layer.masksToBounds = true
-        textField.layer.borderColor = CGColor(srgbRed: 60, green: 131, blue: 255, alpha: 1)
-//        textField.layer.shadowColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
-//        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        textField.layer.shadowOpacity = 1.0
+        textField.layer.cornerRadius = 25
+        textField.layer.shadowRadius = 50
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = UIColor.systemBlue.cgColor
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
+        textField.layer.shadowOpacity = 1.0
     }
     
     

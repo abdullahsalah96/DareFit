@@ -46,7 +46,7 @@ class CreateChallengeViewController: UIViewController {
                 return
             }
             //logout
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
