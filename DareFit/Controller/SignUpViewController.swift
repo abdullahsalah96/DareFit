@@ -24,7 +24,25 @@ class SignUpViewController: UIViewController {
     
     func configureView(){
         errorLabel.isHidden = true
+        styleTextField(textField: firstNameTextField)
+        styleTextField(textField: lastNameTextField)
+        styleTextField(textField: emailTextField)
+        styleTextField(textField: passwordTextField)
     }
+    
+    func styleTextField(textField: UITextField){
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.layer.cornerRadius = 20
+//        textField.layer.shadowRadius = 50
+        textField.layer.borderWidth = 1
+        textField.layer.masksToBounds = true
+        textField.layer.borderColor = CGColor(srgbRed: 60, green: 131, blue: 255, alpha: 1)
+//        textField.layer.shadowColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
+//        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        textField.layer.shadowOpacity = 1.0
+    }
+    
     
     // A function that validates all the fields entered by the user
     func validateFields()->String?{
@@ -39,6 +57,10 @@ class SignUpViewController: UIViewController {
         }else{
             return nil
         }
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -70,7 +92,7 @@ class SignUpViewController: UIViewController {
                     self.showError(error: error!)
                     return
                 }
-                self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
+                self.navigationController?.popViewController(animated: true)
             })
         }
     }

@@ -15,13 +15,13 @@ class JoinChallengeViewController: UIViewController {
     }
     
     func configureView(){
-        self.tabBarController?.navigationItem.hidesBackButton = true
-        self.tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(signOutIsPressed))
+       
     }
     
-    @objc func signOutIsPressed(){
+    @IBAction func signOutPressed(_ sender: Any) {
         signOut()
     }
+    
     
     func signOut(){
         Authentication.signOut { (error) in
@@ -30,7 +30,7 @@ class JoinChallengeViewController: UIViewController {
                 return
             }
             //logout
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

@@ -26,6 +26,7 @@
 		554BF57A2459F48C00A9FD34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5792459F48C00A9FD34 /* User.swift */; };
 		554BF57C245A034000A9FD34 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57B245A034000A9FD34 /* CurrentUser.swift */; };
 		554BF57F245A06B100A9FD34 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57E245A06B100A9FD34 /* MapViewController.swift */; };
+		554BF585245A342500A9FD34 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 554BF584245A342500A9FD34 /* video.mp4 */; };
 		5E97929A8A8584F88435A42D /* Pods_DareFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456070D8654043FBC44792B8 /* Pods_DareFit.framework */; };
 		EB4037E2DE85C86633129E12 /* Pods_DareFit_DareFitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785D7751252A670476A1702 /* Pods_DareFit_DareFitUITests.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		554BF5792459F48C00A9FD34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		554BF57B245A034000A9FD34 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		554BF57E245A06B100A9FD34 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		554BF584245A342500A9FD34 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		74AAE211B6F8749D368C59F2 /* Pods-DareFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFit.release.xcconfig"; path = "Target Support Files/Pods-DareFit/Pods-DareFit.release.xcconfig"; sourceTree = "<group>"; };
 		905B9D3902148B6E3249CCFB /* Pods-DareFit-DareFitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFit-DareFitUITests.release.xcconfig"; path = "Target Support Files/Pods-DareFit-DareFitUITests/Pods-DareFit-DareFitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		98D8AD140CED1B8886D61AA8 /* Pods-DareFitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFitTests.debug.xcconfig"; path = "Target Support Files/Pods-DareFitTests/Pods-DareFitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		5503CBFA2459616000935DE6 /* DareFit */ = {
 			isa = PBXGroup;
 			children = (
+				554BF580245A25FD00A9FD34 /* Media */,
 				550A2C992459669F0061416F /* GoogleService-Info.plist */,
 				5503CBFB2459616000935DE6 /* AppDelegate.swift */,
 				5503CBFD2459616000935DE6 /* SceneDelegate.swift */,
@@ -226,6 +229,14 @@
 				554BF57B245A034000A9FD34 /* CurrentUser.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		554BF580245A25FD00A9FD34 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				554BF584245A342500A9FD34 /* video.mp4 */,
+			);
+			path = Media;
 			sourceTree = "<group>";
 		};
 		62A40E17EDBA5D798F66DB75 /* Frameworks */ = {
@@ -348,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5503CC082459616200935DE6 /* LaunchScreen.storyboard in Resources */,
+				554BF585245A342500A9FD34 /* video.mp4 in Resources */,
 				550A2C9A2459669F0061416F /* GoogleService-Info.plist in Resources */,
 				5503CC052459616200935DE6 /* Assets.xcassets in Resources */,
 				5503CC032459616000935DE6 /* Main.storyboard in Resources */,

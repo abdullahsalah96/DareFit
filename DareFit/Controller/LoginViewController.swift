@@ -23,17 +23,18 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        self.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setup video player
-        setupVideo()
+//        setupVideo()
     }
     
     func setupVideo(){
         // Get path of video in assets
-        let path = Bundle.main.path(forResource: "videoName", ofType: ".mp4")
+        let path = Bundle.main.path(forResource: "video", ofType: ".mp4")
         guard path != nil else{
             print("invalid path")
             return
@@ -46,16 +47,37 @@ class LoginViewController: UIViewController {
         videoPlayer = AVPlayer(playerItem: item)
         //create layer
         videoPlayerLayer = AVPlayerLayer(player: videoPlayer)
+        //mute video player
+        videoPlayer?.isMuted = true
         //adjust frame
-        videoPlayerLayer?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        videoPlayerLayer?.frame = CGRect(x: -self.view.frame.width*2, y: -self.view.frame.height/2, width: self.view.frame.width*5, height: self.view.frame.height*2)
         //attach layer to view
         view.layer.insertSublayer(videoPlayerLayer!, at: 0)
-        //play video
-        videoPlayer?.playImmediately(atRate: 0.3)
+        let myTime = CMTime(seconds: 15, preferredTimescale: 1000)
+        videoPlayer?.currentItem?.seek(to: myTime, completionHandler: {
+            success in
+            //play video
+            self.videoPlayer?.playImmediately(atRate: 0.8)
+        })
     }
     
     func configureView(){
         errorLabel.isHidden = true
+        styleTextField(textField: emailTextField)
+        styleTextField(textField: passwordTextField)
+    }
+    
+    func styleTextField(textField: UITextField){
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.layer.cornerRadius = 20
+        textField.layer.shadowRadius = 3
+        textField.layer.borderWidth = 1
+        textField.layer.masksToBounds = true
+        textField.layer.borderColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 0.1)
+        textField.layer.shadowColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
+        textField.layer.shadowOffset = CGSize(width: 2, height: 2)
+        textField.layer.shadowOpacity = 1.0
     }
     
     func validateFields()->String?{
