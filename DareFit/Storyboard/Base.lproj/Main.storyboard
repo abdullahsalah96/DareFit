@@ -207,6 +207,9 @@
                         <viewLayoutGuide key="safeArea" id="KMh-Z7-FAy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="wyb-mM-obR"/>
+                    <connections>
+                        <segue destination="ypC-gI-Pyz" kind="show" identifier="mapSegue" id="Wjx-9F-7Nc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kO1-hr-xHw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -239,8 +242,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We INNN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-7r-oQf">
-                                <rect key="frame" x="172" y="438" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-7r-oQf">
+                                <rect key="frame" x="86" y="148" width="242" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -251,10 +254,38 @@
                         <viewLayoutGuide key="safeArea" id="7fj-0n-DaX"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="3mm-rf-Hjw"/>
+                    <connections>
+                        <outlet property="nameLabel" destination="AQ2-7r-oQf" id="gMt-uV-hgx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2D-XP-zdB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="-133"/>
+            <point key="canvasLocation" x="1789.8550724637682" y="-133.25892857142856"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="dzX-CA-p4Y">
+            <objects>
+                <viewController id="ypC-gI-Pyz" customClass="MapViewController" customModule="DareFit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1TL-R4-yju">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dIv-JJ-2BF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="463"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="tkL-7o-QVJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="30a-0l-0bP"/>
+                    <connections>
+                        <outlet property="mapView" destination="dIv-JJ-2BF" id="kWh-r1-e4I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vh2-Le-ahy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2624.6376811594205" y="578.57142857142856"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

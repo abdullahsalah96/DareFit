@@ -23,7 +23,13 @@ class Authentication{
                 return
             }
             //user created succesfully, add user to database and login successfully
-            db.collection(collection).addDocument(data: ["firstName":firstName, "lastName": lastName, "uid":authResults!.user.uid]) { (error) in
+            db.collection(collection).addDocument(data: [
+                "firstName":firstName,
+                "lastName": lastName,
+                "uid":authResults!.user.uid,
+                "longitude": 0,
+                "latitude": 0
+            ]) { (error) in
                 if error != nil{
                     //show error message
                     DispatchQueue.main.async {
@@ -47,6 +53,42 @@ class Authentication{
                 }
                 return
             }
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+        }
+    }
+    
+    class func getUserData(completion: @escaping (String?)->Void){
+        let user = Auth.auth().currentUser
+        guard user != nil else{
+            //make sure user is signed in
+            DispatchQueue.main.async {
+                completion("No user signed in")
+            }
+            return
+        }
+        let uid = user?.uid
+        //get user data
+        db.collection(collection).whereField("uid", isEqualTo: uid!).getDocuments { (querySnapshot, error) in
+            guard error == nil else{
+                DispatchQueue.main.async {
+                    completion(error!.localizedDescription)
+                }
+                return
+            }
+            guard querySnapshot != nil else{
+                DispatchQueue.main.async {
+                    completion("Can't find user data")
+                }
+                return
+            }
+            let doc = querySnapshot!.documents[0]
+            CurrentUser.currentUser.uid = doc.data()["uid"] as! String
+            CurrentUser.currentUser.firstName = doc.data()["firstName"] as! String
+            CurrentUser.currentUser.lastName = doc.data()["firstName"] as! String
+            CurrentUser.currentUser.longitude = doc.data()["longitude"] as! Double
+            CurrentUser.currentUser.latitude = doc.data()["latitude"] as! Double
             DispatchQueue.main.async {
                 completion(nil)
             }

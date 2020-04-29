@@ -22,6 +22,10 @@
 		550A2CA024596B0C0061416F /* JoinChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550A2C9F24596B0C0061416F /* JoinChallengeViewController.swift */; };
 		5513CDFA24597E32006B70BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513CDF924597E32006B70BC /* Constants.swift */; };
 		5513CDFD245983F1006B70BC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513CDFC245983F1006B70BC /* Authentication.swift */; };
+		554BF5782459F27600A9FD34 /* Challenges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5772459F27600A9FD34 /* Challenges.swift */; };
+		554BF57A2459F48C00A9FD34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5792459F48C00A9FD34 /* User.swift */; };
+		554BF57C245A034000A9FD34 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57B245A034000A9FD34 /* CurrentUser.swift */; };
+		554BF57F245A06B100A9FD34 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57E245A06B100A9FD34 /* MapViewController.swift */; };
 		5E97929A8A8584F88435A42D /* Pods_DareFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 456070D8654043FBC44792B8 /* Pods_DareFit.framework */; };
 		EB4037E2DE85C86633129E12 /* Pods_DareFit_DareFitUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B785D7751252A670476A1702 /* Pods_DareFit_DareFitUITests.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +71,10 @@
 		550A2C9F24596B0C0061416F /* JoinChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeViewController.swift; sourceTree = "<group>"; };
 		5513CDF924597E32006B70BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5513CDFC245983F1006B70BC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		554BF5772459F27600A9FD34 /* Challenges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenges.swift; sourceTree = "<group>"; };
+		554BF5792459F48C00A9FD34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		554BF57B245A034000A9FD34 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		554BF57E245A06B100A9FD34 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		74AAE211B6F8749D368C59F2 /* Pods-DareFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFit.release.xcconfig"; path = "Target Support Files/Pods-DareFit/Pods-DareFit.release.xcconfig"; sourceTree = "<group>"; };
 		905B9D3902148B6E3249CCFB /* Pods-DareFit-DareFitUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFit-DareFitUITests.release.xcconfig"; path = "Target Support Files/Pods-DareFit-DareFitUITests/Pods-DareFit-DareFitUITests.release.xcconfig"; sourceTree = "<group>"; };
 		98D8AD140CED1B8886D61AA8 /* Pods-DareFitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DareFitTests.debug.xcconfig"; path = "Target Support Files/Pods-DareFitTests/Pods-DareFitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +186,7 @@
 				550A2C9B24596A050061416F /* SignUpViewController.swift */,
 				550A2C9D24596B040061416F /* CreateChallengeViewController.swift */,
 				550A2C9F24596B0C0061416F /* JoinChallengeViewController.swift */,
+				554BF57E245A06B100A9FD34 /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -204,8 +213,19 @@
 			children = (
 				5513CDF924597E32006B70BC /* Constants.swift */,
 				5513CDFC245983F1006B70BC /* Authentication.swift */,
+				554BF5772459F27600A9FD34 /* Challenges.swift */,
+				554BF5792459F48C00A9FD34 /* User.swift */,
+				554BF57D245A03FC00A9FD34 /* Data */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		554BF57D245A03FC00A9FD34 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				554BF57B245A034000A9FD34 /* CurrentUser.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		62A40E17EDBA5D798F66DB75 /* Frameworks */ = {
@@ -460,12 +480,16 @@
 			files = (
 				550A2C9E24596B040061416F /* CreateChallengeViewController.swift in Sources */,
 				5513CDFA24597E32006B70BC /* Constants.swift in Sources */,
+				554BF57C245A034000A9FD34 /* CurrentUser.swift in Sources */,
 				5503CC002459616000935DE6 /* LoginViewController.swift in Sources */,
 				5503CBFC2459616000935DE6 /* AppDelegate.swift in Sources */,
 				550A2C9C24596A050061416F /* SignUpViewController.swift in Sources */,
 				550A2CA024596B0C0061416F /* JoinChallengeViewController.swift in Sources */,
+				554BF57F245A06B100A9FD34 /* MapViewController.swift in Sources */,
 				5503CBFE2459616000935DE6 /* SceneDelegate.swift in Sources */,
 				5513CDFD245983F1006B70BC /* Authentication.swift in Sources */,
+				554BF57A2459F48C00A9FD34 /* User.swift in Sources */,
+				554BF5782459F27600A9FD34 /* Challenges.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

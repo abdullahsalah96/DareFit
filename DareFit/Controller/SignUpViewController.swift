@@ -62,7 +62,16 @@ class SignUpViewController: UIViewController {
                 return
             }
             self.errorLabel.isHidden = true
-            self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
+            //fetching user data
+            Authentication.getUserData(completion: {
+                (error) in
+                //error getting user data
+                guard error == nil else{
+                    self.showError(error: error!)
+                    return
+                }
+                self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
+            })
         }
     }
     

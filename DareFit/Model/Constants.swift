@@ -13,6 +13,12 @@ struct Constants {
     struct SegueIDs{
         static let home = "homeSegue"
         static let signUp = "signUpSegue"
+        static let map = "mapSegue"
+    }
+    struct challenges {
+        static let running = "runningChallenge"
+        static let cycling = "cyclingChallenge"
+        static let swimming = "swimmingChallenge"
     }
     
 }

@@ -69,15 +69,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInPressed(_ sender: Any) {
-        let email = emailTextField.text!.trimmingCharacters(in: .whitespaces)
-        let password = passwordTextField.text!
-        if let error = validateFields(){
-            //There's a problem with fields entered
-            showError(error: error)
-        }else{
-            //sign in
-            signIn(email: email, password: password)
-        }
+//        let email = emailTextField.text!.trimmingCharacters(in: .whitespaces)
+//        let password = passwordTextField.text!
+//        if let error = validateFields(){
+//            //There's a problem with fields entered
+//            showError(error: error)
+//        }else{
+//            //sign in
+////            signIn(email: email, password: password)
+//        }
+        signIn(email: "adbo@test.com", password: "Abdo1234*")
     }
     
     func signIn(email: String, password: String){
@@ -88,7 +89,16 @@ class LoginViewController: UIViewController {
             }
             //signed in successfully
             self.errorLabel.isHidden = true
-            self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
+            //fetching user data
+            Authentication.getUserData(completion: {
+                (error) in
+                //error getting user data
+                guard error == nil else{
+                    self.showError(error: error!)
+                    return
+                }
+                self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
+            })
         }
     }
     
