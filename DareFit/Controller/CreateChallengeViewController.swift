@@ -14,6 +14,15 @@ class CreateChallengeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+//        Challenges.getChallengeUsers(challenge: Constants.challenges.running) { (users, error) in
+//            guard error == nil else{
+//                self.showAlert(title: "Alert", message: "There are no users in challenge")
+//                return
+//            }
+//            if let users = users{
+//                print(users)
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +59,15 @@ class CreateChallengeViewController: UIViewController {
                 return
             }
         })
+    }
+    
+    func unsubscribeFromChallenge(challenge:String){
+        Challenges.unsubscribeFromChallenge(uid: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
+            guard error == nil else{
+                self.showAlert(title: "Can't Unsubscribe", message: error!)
+                return
+            }
+        }
     }
     
     func showAlert(title: String, message: String) {
