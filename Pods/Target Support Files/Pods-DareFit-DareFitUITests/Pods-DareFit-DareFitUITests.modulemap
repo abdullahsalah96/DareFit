@@ -1,0 +1,6 @@
+framework module Pods_DareFit_DareFitUITests {
+  umbrella header "Pods-DareFit-DareFitUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

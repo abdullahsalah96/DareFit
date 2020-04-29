@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>804815444664-82o56kg3slh21f5d0sfhv2f0a9o6h512.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.804815444664-82o56kg3slh21f5d0sfhv2f0a9o6h512</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCaIQiZ4qegPopzIE6tudX5MLVZKKVMVGE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>804815444664</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.abdallaelshikh.DareFit</string>
+	<key>PROJECT_ID</key>
+	<string>darefit-6eb57</string>
+	<key>STORAGE_BUCKET</key>
+	<string>darefit-6eb57.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:804815444664:ios:8bab4bc8d600f7c4a3324d</string>
+	<key>DATABASE_URL</key>
+	<string>https://darefit-6eb57.firebaseio.com</string>
+</dict>
+</plist>
