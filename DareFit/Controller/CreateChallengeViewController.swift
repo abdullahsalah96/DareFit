@@ -9,11 +9,16 @@
 import UIKit
 
 class CreateChallengeViewController: UIViewController {
+    
     //outlets
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var swimmingCardImageView: UIImageView!
+    @IBOutlet weak var cyclingCardImageView: UIImageView!
+    @IBOutlet weak var runningCardImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        configureImageViews()
 //        Challenges.getChallengeUsers(challenge: Constants.challenges.running) { (users, error) in
 //            guard error == nil else{
 //                self.showAlert(title: "Alert", message: "There are no users in challenge")
@@ -29,9 +34,37 @@ class CreateChallengeViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
+    func configureImageViews(){
+        profileImageView.isUserInteractionEnabled = true
+        runningCardImageView.isUserInteractionEnabled = true
+        cyclingCardImageView.isUserInteractionEnabled = true
+        swimmingCardImageView.isUserInteractionEnabled = true
+        let profileTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageViewClicked))
+        profileImageView.addGestureRecognizer(profileTapRecognizer)
+        let runningTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(runningImageViewClicked))
+        runningCardImageView.addGestureRecognizer(runningTapRecognizer)
+        let swimmingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(swimmingImageViewClicked))
+        swimmingCardImageView.addGestureRecognizer(swimmingTapRecognizer)
+        let cyclingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cyclingImageViewClicked))
+        cyclingCardImageView.addGestureRecognizer(cyclingTapRecognizer)
+    }
+    
+    @objc func profileImageViewClicked(recognizer: UITapGestureRecognizer){
+        print("profile")
+    }
+
+    @objc func runningImageViewClicked(recognizer: UITapGestureRecognizer){
+        print("running")
+    }
+    @objc func cyclingImageViewClicked(recognizer: UITapGestureRecognizer){
+        print("cycling")
+    }
+    @objc func swimmingImageViewClicked(recognizer: UITapGestureRecognizer){
+        print("swimming")
+    }
+
     
     func configureView(){
-        nameLabel.text = CurrentUser.currentUser.firstName + CurrentUser.currentUser.lastName
     }
     
     @IBAction func signOutPressed(_ sender: Any) {
@@ -47,7 +80,16 @@ class CreateChallengeViewController: UIViewController {
             }
             //logout
             self.navigationController?.popToRootViewController(animated: true)
+            self.resetUserData()
         }
+    }
+    
+    func resetUserData(){
+        CurrentUser.currentUser.firstName = ""
+        CurrentUser.currentUser.lastName = ""
+        CurrentUser.currentUser.uid = ""
+        CurrentUser.currentUser.latitude = 0
+        CurrentUser.currentUser.longitude = 0
     }
     
     func subscribeToChallenge(challenge:String){
