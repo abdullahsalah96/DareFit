@@ -12,6 +12,10 @@ import AVFoundation
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var signInButton: UIButton!
     var videoPlayer: AVPlayer?
     var videoPlayerLayer: AVPlayerLayer?
     
@@ -62,6 +66,7 @@ class LoginViewController: UIViewController {
     }
     
     func configureView(){
+        activityIndicator.isHidden = true
         errorLabel.isHidden = true
         styleTextField(textField: emailTextField)
         styleTextField(textField: passwordTextField)
@@ -100,12 +105,25 @@ class LoginViewController: UIViewController {
 //            //sign in
 ////            signIn(email: email, password: password)
 //        }
+        signInProgress(isSigningIn: true)
         signIn(email: "adbo@test.com", password: "Abdo1234*")
+    }
+    
+    func signInProgress(isSigningIn:Bool){
+        activityIndicator.isHidden = !isSigningIn
+        signInButton.isEnabled = !isSigningIn
+        signUpButton.isEnabled = !isSigningIn
+        if(isSigningIn){
+            activityIndicator.startAnimating()
+        }else{
+            activityIndicator.stopAnimating()
+        }
     }
     
     func signIn(email: String, password: String){
         Authentication.signIn(email: email, password: password) { (error) in
             guard error == nil else{
+                self.signInProgress(isSigningIn: false)
                 self.showError(error: error!)
                 return
             }
@@ -117,8 +135,10 @@ class LoginViewController: UIViewController {
                 //error getting user data
                 guard error == nil else{
                     self.showError(error: error!)
+                    self.signInProgress(isSigningIn: false)
                     return
                 }
+                self.signInProgress(isSigningIn: false)
                 self.performSegue(withIdentifier: Constants.SegueIDs.home, sender: nil)
             })
         }
