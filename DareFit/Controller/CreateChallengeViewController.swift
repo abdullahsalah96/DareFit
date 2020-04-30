@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class CreateChallengeViewController: UIViewController {
     
     //outlets
@@ -15,19 +16,11 @@ class CreateChallengeViewController: UIViewController {
     @IBOutlet weak var swimmingCardImageView: UIImageView!
     @IBOutlet weak var cyclingCardImageView: UIImageView!
     @IBOutlet weak var runningCardImageView: UIImageView!
+    var challenge = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         configureImageViews()
-//        Challenges.getChallengeUsers(challenge: Constants.challenges.running) { (users, error) in
-//            guard error == nil else{
-//                self.showAlert(title: "Alert", message: "There are no users in challenge")
-//                return
-//            }
-//            if let users = users{
-//                print(users)
-//            }
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,15 +47,24 @@ class CreateChallengeViewController: UIViewController {
     }
 
     @objc func runningImageViewClicked(recognizer: UITapGestureRecognizer){
-        print("running")
+        challenge = Constants.challenges.running
+        performSegue(withIdentifier: Constants.SegueIDs.challengeDetails, sender: nil)
     }
     @objc func cyclingImageViewClicked(recognizer: UITapGestureRecognizer){
-        print("cycling")
+        challenge = Constants.challenges.cycling
+        performSegue(withIdentifier: Constants.SegueIDs.challengeDetails, sender: nil)
     }
     @objc func swimmingImageViewClicked(recognizer: UITapGestureRecognizer){
-        print("swimming")
+        challenge = Constants.challenges.swimming
+        performSegue(withIdentifier: Constants.SegueIDs.challengeDetails, sender: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIDs.challengeDetails{
+            let vc = segue.destination as! CreateChallengeDetailsViewController
+            vc.challenge = challenge
+        }
+    }
     
     func configureView(){
     }
@@ -93,7 +95,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func subscribeToChallenge(challenge:String){
-        Challenges.subscribeToChallenge(firstName: CurrentUser.currentUser.firstName, lastName: CurrentUser.currentUser.lastName, long: CurrentUser.currentUser.longitude, lat: CurrentUser.currentUser.latitude, uid: CurrentUser.currentUser.uid, challenge: challenge, completion: {
+        Challenges.subscribeToChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge, completion: {
             (error) in
             guard error == nil else{
                 self.showAlert(title: "Can't subscribe to challenge", message: error!)
@@ -103,7 +105,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func unsubscribeFromChallenge(challenge:String){
-        Challenges.unsubscribeFromChallenge(uid: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
+        Challenges.unsubscribeFromChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
             guard error == nil else{
                 self.showAlert(title: "Can't Unsubscribe", message: error!)
                 return

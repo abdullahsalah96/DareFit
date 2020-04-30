@@ -9,11 +9,12 @@
 import Foundation
 
 struct Constants {
-    
     struct SegueIDs{
         static let home = "homeSegue"
         static let signUp = "signUpSegue"
         static let map = "mapSegue"
+        static let challengeDetails = "challengeDetails"
+        static let joinChallengeDetails = "joinChallengeDetails"
     }
     struct challenges {
         static let running = "runningChallenge"

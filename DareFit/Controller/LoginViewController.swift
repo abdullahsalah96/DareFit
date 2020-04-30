@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setup video player
-        setupVideo()
+//        setupVideo()
     }
     
     func setupVideo(){

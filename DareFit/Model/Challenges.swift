@@ -4,7 +4,7 @@ import Firebase
 class Challenges{
     private static let db = Firestore.firestore() //firestore database
     
-    class func subscribeToChallenge(firstName:String, lastName:String, long:Double, lat:Double, uid:String, challenge:String, completion: @escaping (String?)->Void){
+    class func subscribeToChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
         //check if user already subscribed
         db.collection(challenge).whereField("uid", isEqualTo: CurrentUser.currentUser.uid).getDocuments { (querySnapshot, error) in
             //check if there's error connecting to server
@@ -22,13 +22,9 @@ class Challenges{
                 return
             }
             //subscribe user
-            db.collection(challenge).document(CurrentUser.currentUser.uid).setData([
-                "firstName":firstName,
-                "lastName":lastName,
-                "longitude":long,
-                "latitude":lat,
-                "uid": uid
-            ]) { (error) in
+            db.collection(challenge).document(challengeUID).updateData([
+                CurrentUser.currentUser.uid : "\(CurrentUser.currentUser.firstName) \(CurrentUser.currentUser.lastName)"
+            ], completion: {(error) in
                 guard error==nil else{
                     //error subscribing to challenge
                     DispatchQueue.main.async {
@@ -40,14 +36,15 @@ class Challenges{
                 DispatchQueue.main.async {
                     completion(nil)
                 }
-            }
+            })
         }
     }
     
-    class func unsubscribeFromChallenge(uid:String, challenge:String, completion: @escaping (String?)->Void){
+    class func unsubscribeFromChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
         //check if user is subscribed
         print(CurrentUser.currentUser.uid)
-        db.collection(challenge).whereField("uid", isEqualTo: CurrentUser.currentUser.uid).getDocuments { (querySnapshot, error) in
+        let name = "\(CurrentUser.currentUser.firstName) \(CurrentUser.currentUser.lastName)"
+        db.collection(challenge).whereField(CurrentUser.currentUser.uid, isEqualTo: name).getDocuments(completion: { (querySnapshot, error) in
             //check if there's error connecting to server
             guard error == nil else{
                 DispatchQueue.main.async {
@@ -58,24 +55,64 @@ class Challenges{
             print(querySnapshot!.documents.count)
             guard querySnapshot!.documents.count > 0 else{
                 //user not subscribed
-                print("user not subscribed")
                 DispatchQueue.main.async {
                     completion("Not Subscribed")
                 }
                 return
             }
-            //delete user
-            db.collection(challenge).document(CurrentUser.currentUser.uid).delete { (error) in
-                guard error == nil else{
-                    //error deleting user
+            //delete user from challenge
+            db.collection(challenge).document(challengeUID).updateData([
+                CurrentUser.currentUser.uid : ""
+            ], completion: {(error) in
+                guard error==nil else{
+                    //error subscribing to challenge
                     DispatchQueue.main.async {
-                        completion(error?.localizedDescription)
+                        completion(error!.localizedDescription)
                     }
                     return
                 }
+                //subscribed successfully
                 DispatchQueue.main.async {
-                    //deleted successfuly
-                    print("Deleted")
+                    completion(nil)
+                }
+            })
+        })
+    }
+    
+    class func createChallenge(firstName:String, lastName:String, long:Double, lat:Double, uid:String, challenge:String, description: String, completion: @escaping (String?)->Void){
+        db.collection(challenge).whereField("uid", isEqualTo: CurrentUser.currentUser.uid).getDocuments { (querySnapshot, error) in
+            //check if there's error connecting to server
+            guard error == nil else{
+                DispatchQueue.main.async {
+                    completion(error?.localizedDescription)
+                }
+                return
+            }
+            guard querySnapshot!.count == 0 else{
+                //challenge already created
+                DispatchQueue.main.async {
+                    completion("Already Created")
+                }
+                return
+            }
+            //create challenge
+            db.collection(challenge).document(CurrentUser.currentUser.uid).setData([
+                "firstName":firstName,
+                "lastName":lastName,
+                "longitude":long,
+                "latitude":lat,
+                "uid": uid,
+                "description": description
+            ]) { (error) in
+                guard error==nil else{
+                    //error creating challenge
+                    DispatchQueue.main.async {
+                        completion(error!.localizedDescription)
+                    }
+                    return
+                }
+                //created successfully
+                DispatchQueue.main.async {
                     completion(nil)
                 }
             }

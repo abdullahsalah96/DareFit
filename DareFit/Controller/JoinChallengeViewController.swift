@@ -16,12 +16,22 @@ class JoinChallengeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpMapView()
         configureView()
         configureImageViews()
     }
     
     func configureView(){
-       self.mapView.delegate = self
+        displayChallengePins(challenge: Constants.challenges.running)
+        displayChallengePins(challenge: Constants.challenges.cycling)
+        displayChallengePins(challenge: Constants.challenges.swimming)
+    }
+    
+    func setUpMapView(){
+        mapView.delegate = self
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
     }
     
     func configureImageViews(){
@@ -78,7 +88,6 @@ extension JoinChallengeViewController: MKMapViewDelegate{
             pinView?.isEnabled = true
             pinView!.canShowCallout = true
             pinView?.animatesDrop = true
-            pinView!.pinTintColor = .red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             return pinView
         }
@@ -91,39 +100,38 @@ extension JoinChallengeViewController: MKMapViewDelegate{
     // This delegate method is implemented to respond to taps. as to direct to media type
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
-            }
+            //pressed on accessory button
+            self.performSegue(withIdentifier: Constants.SegueIDs.joinChallengeDetails, sender: nil)
         }
     }
     
-    func displayPinsOnMap(){
+    func displayChallengePins(challenge:String){
         //parse data
-        //if there are pins remove them from map
-        if self.mapView.annotations.count > 0 {
-            self.mapView.removeAnnotations(self.mapView.annotations)
-        }
-//        let locations = StudentsModel.data
-//        var annotations = [MKPointAnnotation]()
-//        for dictionary in locations {
-//            let lat = CLLocationDegrees(dictionary.latitude)
-//            let long = CLLocationDegrees(dictionary.longitude)
-//            // The lat and long are used to create a CLLocationCoordinates2D instance.
-//            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//            let first = dictionary.firstName
-//            let last = dictionary.lastName
-//            let mediaURL = dictionary.mediaURL
-//            // Here we create the annotation and set its coordiate, title, and subtitle properties
-//            let annotation = MKPointAnnotation()
-//            annotation.coordinate = coordinate
-//            annotation.title = "\(first) \(last)"
-//            annotation.subtitle = mediaURL
-//            // Finally we place the annotation in an array of annotations.
-//            annotations.append(annotation)
-//         }
-         // When the array is complete, we add the annotations to the map.
-//        self.mapView.addAnnotations(annotations)
-        self.mapView.reloadInputViews()
+        Challenges.getChallengeUsers(challenge: challenge, completion: {
+            (users, error) in
+            guard error == nil else{
+                self.showAlert(title: "Error", message: error!)
+                return
+            }
+            var annotations = [MKPointAnnotation]()
+            if let users = users{
+                //loop through users to display them on map
+                for user in users{
+                    let coordinate = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
+                    let first = user.firstName
+                    let last = user.lastName
+                    // Here we create the annotation and set its coordiate, title, and subtitle properties
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = "\(first) \(last)"
+                    annotation.subtitle = "Click for more details"
+                    // Finally we place the annotation in an array of annotations.
+                    annotations.append(annotation)
+                }
+                //show pins
+                self.mapView.addAnnotations(annotations)
+                self.mapView.reloadInputViews()
+            }
+        })
     }
 }
