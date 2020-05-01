@@ -15,10 +15,11 @@ class CreateChallengeViewController: UIViewController {
     @IBOutlet weak var swimmingCardImageView: UIImageView!
     @IBOutlet weak var cyclingCardImageView: UIImageView!
     @IBOutlet weak var runningCardImageView: UIImageView!
+    //variables
     var challenge = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
         configureImageViews()
     }
     
@@ -27,6 +28,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func configureImageViews(){
+        //configuring image views
         runningCardImageView.isUserInteractionEnabled = true
         cyclingCardImageView.isUserInteractionEnabled = true
         swimmingCardImageView.isUserInteractionEnabled = true
@@ -36,10 +38,6 @@ class CreateChallengeViewController: UIViewController {
         swimmingCardImageView.addGestureRecognizer(swimmingTapRecognizer)
         let cyclingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cyclingImageViewClicked))
         cyclingCardImageView.addGestureRecognizer(cyclingTapRecognizer)
-    }
-    
-    @objc func profileImageViewClicked(recognizer: UITapGestureRecognizer){
-        print("profile")
     }
 
     @objc func runningImageViewClicked(recognizer: UITapGestureRecognizer){
@@ -62,9 +60,6 @@ class CreateChallengeViewController: UIViewController {
         }
     }
     
-    func configureView(){
-    }
-    
     @IBAction func signOutPressed(_ sender: Any) {
         signOut()
     }
@@ -83,6 +78,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func resetUserData(){
+        //resetting user data after signing out
         CurrentUser.currentUser.firstName = ""
         CurrentUser.currentUser.lastName = ""
         CurrentUser.currentUser.uid = ""

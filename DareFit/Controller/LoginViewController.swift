@@ -27,20 +27,20 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        //hide toolbar
         self.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setup video player
-//        setupVideo()
+        setupVideo()
     }
     
     func setupVideo(){
         // Get path of video in assets
         let path = Bundle.main.path(forResource: "video", ofType: ".mp4")
         guard path != nil else{
-            print("invalid path")
             return
         }
         // Get url of video
@@ -73,6 +73,7 @@ class LoginViewController: UIViewController {
     }
     
     func styleTextField(textField: UITextField){
+        //styling of text fields
         textField.layer.masksToBounds = true
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
         textField.leftViewMode = .always
@@ -86,6 +87,7 @@ class LoginViewController: UIViewController {
     }
     
     func validateFields()->String?{
+        //fields validation
         if emailTextField.text?.trimmingCharacters(in: .whitespaces) == ""{
             return "Please a Valid Email Address"
         }else if !Authentication.isValidPassword(password: passwordTextField.text!){
@@ -97,10 +99,9 @@ class LoginViewController: UIViewController {
     
     @IBAction func signInPressed(_ sender: Any) {
         signInProgress(isSigningIn: true)
-//        signIn(email: emailTextField.text!, password: passwordTextField.text!)
-        signIn(email: "test@test.com", password: "Test1234*")
-        //generating random data
-//        randomData()
+        signIn(email: emailTextField.text!, password: passwordTextField.text!)
+        //generating random data - used to populate database with random users and challenges
+        //randomData()
     }
     
     func randomData(){
@@ -125,8 +126,6 @@ class LoginViewController: UIViewController {
     }
     
     func signIn(email: String, password: String){
-        print(email)
-        print(password)
         Authentication.signIn(email: email, password: password) { (error) in
             guard error == nil else{
                 self.signInProgress(isSigningIn: false)
@@ -152,6 +151,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func signUpPressed(_ sender: Any) {
+        //go to sign up controller
         performSegue(withIdentifier: Constants.SegueIDs.signUp, sender: nil)
     }
     

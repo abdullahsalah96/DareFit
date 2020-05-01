@@ -28,11 +28,13 @@ class SignUpViewController: UIViewController {
     
     func configureView(){
         errorLabel.isHidden = true
+        //styling textFields
         styleTextField(textField: firstNameTextField)
         styleTextField(textField: lastNameTextField)
         styleTextField(textField: emailTextField)
         styleTextField(textField: passwordTextField)
         styleTextField(textField: urlTextField)
+        //getting location of user
         self.locationManager.requestAlwaysAuthorization()
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
@@ -111,8 +113,8 @@ class SignUpViewController: UIViewController {
                     self.showError(error: error!)
                     return
                 }
+                //signed up successfully
                 self.signUpButton.isEnabled = true
-                print(CurrentUser.currentUser.uid)
                 self.navigationController?.popViewController(animated: true)
             })
         }

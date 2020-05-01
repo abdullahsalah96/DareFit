@@ -10,9 +10,10 @@ import UIKit
 import MapKit
 
 class JoinChallengeViewController: UIViewController {
+    //variables
     var challenges:[Challenge] = []
     var selectedChallenge:Challenge!
-    
+    //outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -24,11 +25,13 @@ class JoinChallengeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //reload map data
         self.mapView.reloadInputViews()
     }
     
     func configureView(){
         self.activityIndicator.isHidden = true
+        //displaying pins on map
         displayChallengePins(challenge: Constants.challenges.running)
         displayChallengePins(challenge: Constants.challenges.cycling)
         displayChallengePins(challenge: Constants.challenges.swimming)
@@ -124,6 +127,7 @@ extension JoinChallengeViewController: MKMapViewDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.SegueIDs.joinChallengeDetails{
+            //setting challenge details
             let vc = segue.destination as! JoinChallengeDetailsViewController
             vc.challenge = self.selectedChallenge
         }

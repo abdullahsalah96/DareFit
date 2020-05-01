@@ -11,6 +11,7 @@ class JoinChallengeDetailsViewController: UIViewController {
         configureView()
     }
     func configureView(){
+        //setting challenge data
         self.descriptionLabel.text = challenge.description
         self.nameLabel.text = challenge.firstName
     }
@@ -20,7 +21,6 @@ class JoinChallengeDetailsViewController: UIViewController {
     @IBAction func subscribeButtonPressed(_ sender: Any) {
         let url = URL(string: challenge.url)
         if let url = url{
-            print(url)
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }

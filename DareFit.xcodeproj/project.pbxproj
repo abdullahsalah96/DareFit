@@ -14,8 +14,6 @@
 		5503CC032459616000935DE6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5503CC012459616000935DE6 /* Main.storyboard */; };
 		5503CC052459616200935DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5503CC042459616200935DE6 /* Assets.xcassets */; };
 		5503CC082459616200935DE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5503CC062459616200935DE6 /* LaunchScreen.storyboard */; };
-		5503CC132459616200935DE6 /* DareFitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5503CC122459616200935DE6 /* DareFitTests.swift */; };
-		5503CC1E2459616200935DE6 /* DareFitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5503CC1D2459616200935DE6 /* DareFitUITests.swift */; };
 		550A2C9A2459669F0061416F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 550A2C992459669F0061416F /* GoogleService-Info.plist */; };
 		550A2C9C24596A050061416F /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550A2C9B24596A050061416F /* SignUpViewController.swift */; };
 		550A2C9E24596B040061416F /* CreateChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550A2C9D24596B040061416F /* CreateChallengeViewController.swift */; };
@@ -64,11 +62,7 @@
 		5503CC072459616200935DE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5503CC092459616200935DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5503CC0E2459616200935DE6 /* DareFitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DareFitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5503CC122459616200935DE6 /* DareFitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DareFitTests.swift; sourceTree = "<group>"; };
-		5503CC142459616200935DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5503CC192459616200935DE6 /* DareFitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DareFitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5503CC1D2459616200935DE6 /* DareFitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DareFitUITests.swift; sourceTree = "<group>"; };
-		5503CC1F2459616200935DE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550A2C992459669F0061416F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		550A2C9B24596A050061416F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		550A2C9D24596B040061416F /* CreateChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeViewController.swift; sourceTree = "<group>"; };
@@ -136,8 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				5503CBFA2459616000935DE6 /* DareFit */,
-				5503CC112459616200935DE6 /* DareFitTests */,
-				5503CC1C2459616200935DE6 /* DareFitUITests */,
 				5503CBF92459616000935DE6 /* Products */,
 				32C80E6AD5AA3D114FAC2FAE /* Pods */,
 				62A40E17EDBA5D798F66DB75 /* Frameworks */,
@@ -168,24 +160,6 @@
 				5503CC2C2459619400935DE6 /* Assets */,
 			);
 			path = DareFit;
-			sourceTree = "<group>";
-		};
-		5503CC112459616200935DE6 /* DareFitTests */ = {
-			isa = PBXGroup;
-			children = (
-				5503CC122459616200935DE6 /* DareFitTests.swift */,
-				5503CC142459616200935DE6 /* Info.plist */,
-			);
-			path = DareFitTests;
-			sourceTree = "<group>";
-		};
-		5503CC1C2459616200935DE6 /* DareFitUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5503CC1D2459616200935DE6 /* DareFitUITests.swift */,
-				5503CC1F2459616200935DE6 /* Info.plist */,
-			);
-			path = DareFitUITests;
 			sourceTree = "<group>";
 		};
 		5503CC2B2459618200935DE6 /* Controller */ = {
@@ -222,14 +196,22 @@
 			isa = PBXGroup;
 			children = (
 				554BF57D245A03FC00A9FD34 /* Data */,
+				5542A76F245BCE7200E4E568 /* Data Generator */,
 				5513CDF924597E32006B70BC /* Constants.swift */,
 				5542A76B245B488600E4E568 /* Challenge.swift */,
+				554BF5792459F48C00A9FD34 /* User.swift */,
 				5513CDFC245983F1006B70BC /* Authentication.swift */,
 				554BF5772459F27600A9FD34 /* Database.swift */,
-				554BF5792459F48C00A9FD34 /* User.swift */,
-				5542A76D245BB13C00E4E568 /* RandomDataGenerator.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5542A76F245BCE7200E4E568 /* Data Generator */ = {
+			isa = PBXGroup;
+			children = (
+				5542A76D245BB13C00E4E568 /* RandomDataGenerator.swift */,
+			);
+			path = "Data Generator";
 			sourceTree = "<group>";
 		};
 		554BF57D245A03FC00A9FD34 /* Data */ = {
@@ -521,7 +503,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5503CC132459616200935DE6 /* DareFitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +510,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5503CC1E2459616200935DE6 /* DareFitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

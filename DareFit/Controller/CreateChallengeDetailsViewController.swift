@@ -3,18 +3,20 @@ import MapKit
 import CoreLocation
 
 class CreateChallengeDetailsViewController: UIViewController {
-
+    //outlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var challengeDescription: UITextView!
+    //variables
     var challenge = ""
     let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMapView()
-        print(challenge)
     }
     
     func setUpMapView(){
+        //setting up location manager
         self.locationManager.requestAlwaysAuthorization()
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
@@ -27,7 +29,6 @@ class CreateChallengeDetailsViewController: UIViewController {
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-
         if let coor = mapView.userLocation.location?.coordinate{
             mapView.setCenter(coor, animated: true)
         }

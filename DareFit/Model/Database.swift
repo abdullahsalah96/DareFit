@@ -42,7 +42,6 @@ class Database{
     
     class func deleteChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
         //check if user is subscribed
-        print(CurrentUser.currentUser.uid)
         let name = "\(CurrentUser.currentUser.firstName) \(CurrentUser.currentUser.lastName)"
         db.collection(challenge).whereField(CurrentUser.currentUser.uid, isEqualTo: name).getDocuments(completion: { (querySnapshot, error) in
             //check if there's error connecting to server
@@ -52,7 +51,6 @@ class Database{
                 }
                 return
             }
-            print(querySnapshot!.documents.count)
             guard querySnapshot!.documents.count > 0 else{
                 //user not subscribed
                 DispatchQueue.main.async {

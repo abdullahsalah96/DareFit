@@ -54,7 +54,7 @@ class Authentication{
                 }
                 return
             }
-            if let uid = authResults?.user.uid{
+            if (authResults?.user.uid) != nil{
                 //found user
                 DispatchQueue.main.async {
                     completion(nil)
