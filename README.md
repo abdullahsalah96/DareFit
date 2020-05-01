@@ -36,4 +36,9 @@ DareFit is an application that allows users to create and join sports challenges
   <img src="docs/JoinChallengeDetails.png" width="200" height="365">
 </p>
 
-#### DareFit uitilizes Apple MapKit, Firebase Authentication and Firebase Firestore Database to povide these features. The Application UI was designed using Adobe XD.
+## Dependencies:
+- Apple MapKit 
+- Firebase Authentication
+- Firebase Firestore Database
+
+The Application UI was designed using Adobe XD.
