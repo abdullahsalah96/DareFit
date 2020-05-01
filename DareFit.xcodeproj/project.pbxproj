@@ -24,7 +24,8 @@
 		5513CDFD245983F1006B70BC /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513CDFC245983F1006B70BC /* Authentication.swift */; };
 		5534874F245A6A2300245E52 /* CreateChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534874E245A6A2300245E52 /* CreateChallengeDetailsViewController.swift */; };
 		55348751245A6A3100245E52 /* JoinChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348750245A6A3100245E52 /* JoinChallengeDetailsViewController.swift */; };
-		554BF5782459F27600A9FD34 /* Challenges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5772459F27600A9FD34 /* Challenges.swift */; };
+		5542A76C245B488600E4E568 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542A76B245B488600E4E568 /* Challenge.swift */; };
+		554BF5782459F27600A9FD34 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5772459F27600A9FD34 /* Database.swift */; };
 		554BF57A2459F48C00A9FD34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5792459F48C00A9FD34 /* User.swift */; };
 		554BF57C245A034000A9FD34 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57B245A034000A9FD34 /* CurrentUser.swift */; };
 		554BF585245A342500A9FD34 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 554BF584245A342500A9FD34 /* video.mp4 */; };
@@ -75,7 +76,8 @@
 		5513CDFC245983F1006B70BC /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		5534874E245A6A2300245E52 /* CreateChallengeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeDetailsViewController.swift; sourceTree = "<group>"; };
 		55348750245A6A3100245E52 /* JoinChallengeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeDetailsViewController.swift; sourceTree = "<group>"; };
-		554BF5772459F27600A9FD34 /* Challenges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenges.swift; sourceTree = "<group>"; };
+		5542A76B245B488600E4E568 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		554BF5772459F27600A9FD34 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		554BF5792459F48C00A9FD34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		554BF57B245A034000A9FD34 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		554BF584245A342500A9FD34 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
@@ -217,11 +219,12 @@
 		5513CDFB24598151006B70BC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5513CDF924597E32006B70BC /* Constants.swift */,
-				5513CDFC245983F1006B70BC /* Authentication.swift */,
-				554BF5772459F27600A9FD34 /* Challenges.swift */,
-				554BF5792459F48C00A9FD34 /* User.swift */,
 				554BF57D245A03FC00A9FD34 /* Data */,
+				5513CDF924597E32006B70BC /* Constants.swift */,
+				5542A76B245B488600E4E568 /* Challenge.swift */,
+				5513CDFC245983F1006B70BC /* Authentication.swift */,
+				554BF5772459F27600A9FD34 /* Database.swift */,
+				554BF5792459F48C00A9FD34 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -500,12 +503,13 @@
 				5503CBFC2459616000935DE6 /* AppDelegate.swift in Sources */,
 				5534874F245A6A2300245E52 /* CreateChallengeDetailsViewController.swift in Sources */,
 				550A2C9C24596A050061416F /* SignUpViewController.swift in Sources */,
+				5542A76C245B488600E4E568 /* Challenge.swift in Sources */,
 				550A2CA024596B0C0061416F /* JoinChallengeViewController.swift in Sources */,
 				5503CBFE2459616000935DE6 /* SceneDelegate.swift in Sources */,
 				55348751245A6A3100245E52 /* JoinChallengeDetailsViewController.swift in Sources */,
 				5513CDFD245983F1006B70BC /* Authentication.swift in Sources */,
 				554BF57A2459F48C00A9FD34 /* User.swift in Sources */,
-				554BF5782459F27600A9FD34 /* Challenges.swift in Sources */,
+				554BF5782459F27600A9FD34 /* Database.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

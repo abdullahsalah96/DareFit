@@ -1,7 +1,7 @@
 import Foundation
 import Firebase
 
-class Challenges{
+class Database{
     private static let db = Firestore.firestore() //firestore database
     
     class func subscribeToChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
@@ -79,7 +79,7 @@ class Challenges{
         })
     }
     
-    class func createChallenge(firstName:String, lastName:String, long:Double, lat:Double, uid:String, challenge:String, description: String, completion: @escaping (String?)->Void){
+    class func createChallenge(firstName:String, lastName:String, long:Double, lat:Double, uid:String, challenge:String, description: String, url:String, completion: @escaping (String?)->Void){
         db.collection(challenge).whereField("uid", isEqualTo: CurrentUser.currentUser.uid).getDocuments { (querySnapshot, error) in
             //check if there's error connecting to server
             guard error == nil else{
@@ -102,6 +102,7 @@ class Challenges{
                 "longitude":long,
                 "latitude":lat,
                 "uid": uid,
+                "url" url
                 "description": description
             ]) { (error) in
                 guard error==nil else{
@@ -119,9 +120,9 @@ class Challenges{
         }
     }
     
-    class func getChallengeUsers(challenge: String, completion: @escaping ([User]?, String?)->Void){
-        var users:[User]? = []
-        db.collection(challenge).getDocuments { (querySnapshot, error) in
+    class func getChallenges(inChallenge: String, completion: @escaping ([Challenge]?, String?)->Void){
+        var fetchedChallenges:[Challenge]? = []
+        db.collection(inChallenge).getDocuments { (querySnapshot, error) in
             guard error == nil else{
                 //error getting users data
                 DispatchQueue.main.async {
@@ -130,9 +131,9 @@ class Challenges{
                 return
             }
             guard querySnapshot != nil else{
-                //no users subscribed
+                //no challenges
                 DispatchQueue.main.async {
-                    completion(users, nil)
+                    completion(nil, nil)
                 }
                 return
             }
@@ -146,12 +147,14 @@ class Challenges{
                     let lastName = doc.data()["lastName"] as! String
                     let longitude = doc.data()["longitude"] as! Double
                     let latitude = doc.data()["latitude"] as! Double
-                    let user = User(firstName: firstName, lastName: lastName, uid: uid, longitude: longitude, latitude: latitude)
-                    users!.append(user)
+                    let description = doc.data()["description"] as! String
+                    let url = doc.data()["url"] as! String
+                    let challenge = Challenge(challengeType: inChallenge, firstName: firstName, lastName: lastName, uid: uid, longitude: longitude, latitude: latitude, description: description, url: url)
+                    fetchedChallenges!.append(challenge)
                 }
                 //done appending users
                 DispatchQueue.main.async {
-                    completion(users, nil)
+                    completion(fetchedChallenges, nil)
                 }
             }
         }

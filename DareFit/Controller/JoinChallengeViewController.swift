@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 
 class JoinChallengeViewController: UIViewController {
-    
+    var challenges:[Challenge] = []
+    var selectedChallenge:Challenge!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -75,6 +76,17 @@ class JoinChallengeViewController: UIViewController {
         self.present(alertVC, animated: true)
     }
     
+    func getSelectedChallenge(longitude: Double, latitude: Double) ->Challenge?{
+        //search in available challenges
+        for challenge in self.challenges{
+            if challenge.longitude == longitude && challenge.latitude == latitude{
+                //selected challenge
+                return challenge
+            }
+        }
+        //didn't find challenge
+        return nil
+    }
 }
 
 extension JoinChallengeViewController: MKMapViewDelegate{
@@ -101,25 +113,35 @@ extension JoinChallengeViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             //pressed on accessory button
+            self.selectedChallenge = getSelectedChallenge(longitude: view.annotation!.coordinate.longitude, latitude: view.annotation!.coordinate.latitude)
             self.performSegue(withIdentifier: Constants.SegueIDs.joinChallengeDetails, sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIDs.joinChallengeDetails{
+            let vc = segue.destination as! JoinChallengeDetailsViewController
+            vc.challenge = self.selectedChallenge
         }
     }
     
     func displayChallengePins(challenge:String){
         //parse data
-        Challenges.getChallengeUsers(challenge: challenge, completion: {
-            (users, error) in
+        Database.getChallenges(inChallenge: challenge, completion: {
+            (challenges, error) in
             guard error == nil else{
                 self.showAlert(title: "Error", message: error!)
                 return
             }
             var annotations = [MKPointAnnotation]()
-            if let users = users{
+            if let challenges = challenges{
+                // populate challenges array
+                self.challenges = challenges
                 //loop through users to display them on map
-                for user in users{
-                    let coordinate = CLLocationCoordinate2D(latitude: user.latitude, longitude: user.longitude)
-                    let first = user.firstName
-                    let last = user.lastName
+                for challenge in challenges{
+                    let coordinate = CLLocationCoordinate2D(latitude: challenge.latitude, longitude: challenge.longitude)
+                    let first = challenge.firstName
+                    let last = challenge.lastName
                     // Here we create the annotation and set its coordiate, title, and subtitle properties
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = coordinate

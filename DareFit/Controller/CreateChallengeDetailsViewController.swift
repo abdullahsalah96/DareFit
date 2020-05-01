@@ -38,7 +38,7 @@ class CreateChallengeDetailsViewController: UIViewController {
     }
     @IBAction func confirmButton(_ sender: Any) {
         //add to database
-        Challenges.createChallenge(firstName: CurrentUser.currentUser.firstName, lastName: CurrentUser.currentUser.lastName, long: CurrentUser.currentUser.longitude, lat: CurrentUser.currentUser.latitude, uid: CurrentUser.currentUser.uid, challenge: self.challenge, description: self.challengeDescription.text, completion: {
+        Database.createChallenge(firstName: CurrentUser.currentUser.firstName, lastName: CurrentUser.currentUser.lastName, long: CurrentUser.currentUser.longitude, lat: CurrentUser.currentUser.latitude, uid: CurrentUser.currentUser.uid, challenge: self.challenge, description: self.challengeDescription.text, completion: {
             (error) in
             guard error == nil else{
                 self.showAlert(title: "Error", message: error!)

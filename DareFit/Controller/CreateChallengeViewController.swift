@@ -95,7 +95,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func subscribeToChallenge(challenge:String){
-        Challenges.subscribeToChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge, completion: {
+        Database.subscribeToChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge, completion: {
             (error) in
             guard error == nil else{
                 self.showAlert(title: "Can't subscribe to challenge", message: error!)
@@ -105,7 +105,7 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func unsubscribeFromChallenge(challenge:String){
-        Challenges.unsubscribeFromChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
+        Database.unsubscribeFromChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
             guard error == nil else{
                 self.showAlert(title: "Can't Unsubscribe", message: error!)
                 return
