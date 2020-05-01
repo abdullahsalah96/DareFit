@@ -1,7 +1,10 @@
 # DareFit
 DareFit is an application that allows users to create and join sports challenges. After signing up on the application, users have the ability to create either running, cycling or swimming challenges and post it on their location so that other users can join this challenge. 
 
-The application consists of 6 view controllers:
+## View controllers:
+<p align="center">
+  <img src="docs/views.png">
+</p>
 
 - Sign In View Controller which gives users the ability to sign into the application using their credentials.
 <p align="center">
@@ -33,4 +36,4 @@ The application consists of 6 view controllers:
   <img src="docs/JoinChallengeDetails.png" width="200" height="420">
 </p>
 
-DareFit uitilizes Apple MapKit, Firebase Authentication and Firebase Firestore Database to povide these features. The Application UI was designed using Adobe XD.
+#### DareFit uitilizes Apple MapKit, Firebase Authentication and Firebase Firestore Database to povide these features. The Application UI was designed using Adobe XD.
