@@ -3,7 +3,7 @@ DareFit is an application that allows users to create and join sports challenges
 
 ## View controllers:
 <p align="center">
-  <img src="docs/views.png" width="200" height="420">
+  <img src="docs/views.png">
 </p>
 
 - Sign In View Controller which gives users the ability to sign into the application using their credentials.
