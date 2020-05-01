@@ -12,17 +12,23 @@ import MapKit
 class JoinChallengeViewController: UIViewController {
     var challenges:[Challenge] = []
     var selectedChallenge:Challenge!
-    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpMapView()
         configureView()
-        configureImageViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.mapView.reloadInputViews()
     }
     
     func configureView(){
+        self.activityIndicator.isHidden = true
         displayChallengePins(challenge: Constants.challenges.running)
         displayChallengePins(challenge: Constants.challenges.cycling)
         displayChallengePins(challenge: Constants.challenges.swimming)
@@ -35,15 +41,6 @@ class JoinChallengeViewController: UIViewController {
         mapView.isScrollEnabled = true
     }
     
-    func configureImageViews(){
-        profileImageView.isUserInteractionEnabled = true
-        let profileTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageViewClicked))
-        profileImageView.addGestureRecognizer(profileTapRecognizer)
-    }
-    
-    @objc func profileImageViewClicked(recognizer: UITapGestureRecognizer){
-        print("profile")
-    }
     
     @IBAction func signOutPressed(_ sender: Any) {
         signOut()
@@ -76,16 +73,21 @@ class JoinChallengeViewController: UIViewController {
         self.present(alertVC, animated: true)
     }
     
-    func getSelectedChallenge(longitude: Double, latitude: Double) ->Challenge?{
+    func viewSelectedChallenge(longitude: Double, latitude: Double){
         //search in available challenges
         for challenge in self.challenges{
             if challenge.longitude == longitude && challenge.latitude == latitude{
                 //selected challenge
-                return challenge
+                self.selectedChallenge = challenge
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.performSegue(withIdentifier: Constants.SegueIDs.joinChallengeDetails, sender: nil)
+                return
             }
         }
-        //didn't find challenge
-        return nil
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
+        showAlert(title: "Error", message: "Can't fetch challenge details")
     }
 }
 
@@ -113,8 +115,10 @@ extension JoinChallengeViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             //pressed on accessory button
-            self.selectedChallenge = getSelectedChallenge(longitude: view.annotation!.coordinate.longitude, latitude: view.annotation!.coordinate.latitude)
-            self.performSegue(withIdentifier: Constants.SegueIDs.joinChallengeDetails, sender: nil)
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+            //get challenge details and segue
+            viewSelectedChallenge(longitude: view.annotation!.coordinate.longitude, latitude: view.annotation!.coordinate.latitude)
         }
     }
     
@@ -135,10 +139,10 @@ extension JoinChallengeViewController: MKMapViewDelegate{
             }
             var annotations = [MKPointAnnotation]()
             if let challenges = challenges{
-                // populate challenges array
-                self.challenges = challenges
                 //loop through users to display them on map
                 for challenge in challenges{
+                    // populate challenges array
+                    self.challenges.append(challenge)
                     let coordinate = CLLocationCoordinate2D(latitude: challenge.latitude, longitude: challenge.longitude)
                     let first = challenge.firstName
                     let last = challenge.lastName

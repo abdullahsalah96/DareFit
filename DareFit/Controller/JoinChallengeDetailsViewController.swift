@@ -5,6 +5,7 @@ class JoinChallengeDetailsViewController: UIViewController {
     var challenge:Challenge!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -17,6 +18,11 @@ class JoinChallengeDetailsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func subscribeButtonPressed(_ sender: Any) {
+        let url = URL(string: challenge.url)
+        if let url = url{
+            print(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
 }

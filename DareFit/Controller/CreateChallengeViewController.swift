@@ -12,7 +12,6 @@ import UIKit
 class CreateChallengeViewController: UIViewController {
     
     //outlets
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var swimmingCardImageView: UIImageView!
     @IBOutlet weak var cyclingCardImageView: UIImageView!
     @IBOutlet weak var runningCardImageView: UIImageView!
@@ -28,12 +27,9 @@ class CreateChallengeViewController: UIViewController {
     }
     
     func configureImageViews(){
-        profileImageView.isUserInteractionEnabled = true
         runningCardImageView.isUserInteractionEnabled = true
         cyclingCardImageView.isUserInteractionEnabled = true
         swimmingCardImageView.isUserInteractionEnabled = true
-        let profileTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageViewClicked))
-        profileImageView.addGestureRecognizer(profileTapRecognizer)
         let runningTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(runningImageViewClicked))
         runningCardImageView.addGestureRecognizer(runningTapRecognizer)
         let swimmingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(swimmingImageViewClicked))
@@ -92,25 +88,6 @@ class CreateChallengeViewController: UIViewController {
         CurrentUser.currentUser.uid = ""
         CurrentUser.currentUser.latitude = 0
         CurrentUser.currentUser.longitude = 0
-    }
-    
-    func subscribeToChallenge(challenge:String){
-        Database.subscribeToChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge, completion: {
-            (error) in
-            guard error == nil else{
-                self.showAlert(title: "Can't subscribe to challenge", message: error!)
-                return
-            }
-        })
-    }
-    
-    func unsubscribeFromChallenge(challenge:String){
-        Database.unsubscribeFromChallenge(challengeUID: CurrentUser.currentUser.uid, challenge: challenge) { (error) in
-            guard error == nil else{
-                self.showAlert(title: "Can't Unsubscribe", message: error!)
-                return
-            }
-        }
     }
     
     func showAlert(title: String, message: String) {

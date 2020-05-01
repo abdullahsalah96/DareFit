@@ -5,7 +5,6 @@ struct Challenge{
     var firstName = ""
     var lastName = ""
     var uid = ""
-    var url = ""
     var longitude:Double = 0
     var latitude:Double = 0
     var description = ""

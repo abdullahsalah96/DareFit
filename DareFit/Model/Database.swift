@@ -40,7 +40,7 @@ class Database{
         }
     }
     
-    class func unsubscribeFromChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
+    class func deleteChallenge(challengeUID:String, challenge:String, completion: @escaping (String?)->Void){
         //check if user is subscribed
         print(CurrentUser.currentUser.uid)
         let name = "\(CurrentUser.currentUser.firstName) \(CurrentUser.currentUser.lastName)"
@@ -102,7 +102,7 @@ class Database{
                 "longitude":long,
                 "latitude":lat,
                 "uid": uid,
-                "url" url
+                "url": url,
                 "description": description
             ]) { (error) in
                 guard error==nil else{

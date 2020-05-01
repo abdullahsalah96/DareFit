@@ -8,14 +8,18 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 
 class SignUpViewController: UIViewController {
-
+    
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +32,15 @@ class SignUpViewController: UIViewController {
         styleTextField(textField: lastNameTextField)
         styleTextField(textField: emailTextField)
         styleTextField(textField: passwordTextField)
+        styleTextField(textField: urlTextField)
+        self.locationManager.requestAlwaysAuthorization()
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func styleTextField(textField: UITextField){
@@ -52,6 +65,8 @@ class SignUpViewController: UIViewController {
             return "Please Enter your Last Name"
         }else if emailTextField.text?.trimmingCharacters(in: .whitespaces) == ""{
             return "Please Enter your Email"
+        }else if urlTextField.text?.trimmingCharacters(in: .whitespaces) == ""{
+            return "Please a valid website"
         }else if !Authentication.isValidPassword(password: passwordTextField.text!){
             return "Invalid Password, Passwords should be of at least 8 characters containing uppercase/lowercase letters, a number and a special character"
         }else{
@@ -71,15 +86,18 @@ class SignUpViewController: UIViewController {
             let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespaces)
             let email = emailTextField.text!.trimmingCharacters(in: .whitespaces)
             let password = passwordTextField.text!
-            signUp(firstName: firstName, lastName: lastName, email: email, password: password)
+            let url = urlTextField.text!
+            signUp(firstName: firstName, lastName: lastName, email: email, password: password, url:url)
         }else{
            showError(error: error!)
         }
     }
     
-    func signUp(firstName: String, lastName: String, email:String, password:String){
-        Authentication.signUp(firstName: firstName, lastName: lastName, email: email, password: password) { (error) in
+    func signUp(firstName: String, lastName: String, email:String, password:String, url:String){
+        self.signUpButton.isEnabled = false
+        Authentication.signUp(firstName: firstName, lastName: lastName, email: email, password: password, url: url, long: CurrentUser.currentUser.longitude, lat: CurrentUser.currentUser.latitude) { (error) in
             guard error == nil else{
+                self.signUpButton.isEnabled = true
                 self.showError(error: error!)
                 return
             }
@@ -89,9 +107,12 @@ class SignUpViewController: UIViewController {
                 (error) in
                 //error getting user data
                 guard error == nil else{
+                    self.signUpButton.isEnabled = true
                     self.showError(error: error!)
                     return
                 }
+                self.signUpButton.isEnabled = true
+                print(CurrentUser.currentUser.uid)
                 self.navigationController?.popViewController(animated: true)
             })
         }
@@ -102,4 +123,14 @@ class SignUpViewController: UIViewController {
         errorLabel.text = error
     }
     
+}
+
+extension SignUpViewController: CLLocationManagerDelegate{
+    
+func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+    //set users location
+    CurrentUser.currentUser.longitude = locValue.longitude
+    CurrentUser.currentUser.latitude = locValue.latitude
+    }
 }

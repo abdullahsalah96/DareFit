@@ -73,14 +73,14 @@ class LoginViewController: UIViewController {
     }
     
     func styleTextField(textField: UITextField){
+        textField.layer.masksToBounds = true
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
         textField.leftViewMode = .always
-        textField.layer.cornerRadius = 20
-        textField.layer.shadowRadius = 3
-        textField.layer.borderWidth = 1
-        textField.layer.masksToBounds = true
-        textField.layer.borderColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 0.1)
-        textField.layer.shadowColor = CGColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
+        textField.layer.cornerRadius = 25
+        textField.layer.shadowRadius = 50
+        textField.layer.borderWidth = 0.0
+        textField.layer.borderColor = UIColor.clear.cgColor
+        textField.layer.shadowColor = UIColor.black.cgColor
         textField.layer.shadowOffset = CGSize(width: 2, height: 2)
         textField.layer.shadowOpacity = 1.0
     }
@@ -96,17 +96,21 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInPressed(_ sender: Any) {
-//        let email = emailTextField.text!.trimmingCharacters(in: .whitespaces)
-//        let password = passwordTextField.text!
-//        if let error = validateFields(){
-//            //There's a problem with fields entered
-//            showError(error: error)
-//        }else{
-//            //sign in
-////            signIn(email: email, password: password)
-//        }
         signInProgress(isSigningIn: true)
-        signIn(email: "adbo@test.com", password: "Abdo1234*")
+//        signIn(email: emailTextField.text!, password: passwordTextField.text!)
+        signIn(email: "test@test.com", password: "Test1234*")
+        //generating random data
+//        randomData()
+    }
+    
+    func randomData(){
+        //a function that keeps generating random data for demonstration
+        RandomDataGenerator.generateRandomUsers(challenge: Constants.challenges.running)
+         let interval:TimeInterval = 5
+         DispatchQueue.main.asyncAfter(deadline: .now() + interval) {
+            //calling function again after interval
+            self.randomData()
+         }
     }
     
     func signInProgress(isSigningIn:Bool){
@@ -121,6 +125,8 @@ class LoginViewController: UIViewController {
     }
     
     func signIn(email: String, password: String){
+        print(email)
+        print(password)
         Authentication.signIn(email: email, password: password) { (error) in
             guard error == nil else{
                 self.signInProgress(isSigningIn: false)

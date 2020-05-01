@@ -25,6 +25,7 @@
 		5534874F245A6A2300245E52 /* CreateChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5534874E245A6A2300245E52 /* CreateChallengeDetailsViewController.swift */; };
 		55348751245A6A3100245E52 /* JoinChallengeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55348750245A6A3100245E52 /* JoinChallengeDetailsViewController.swift */; };
 		5542A76C245B488600E4E568 /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542A76B245B488600E4E568 /* Challenge.swift */; };
+		5542A76E245BB13C00E4E568 /* RandomDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542A76D245BB13C00E4E568 /* RandomDataGenerator.swift */; };
 		554BF5782459F27600A9FD34 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5772459F27600A9FD34 /* Database.swift */; };
 		554BF57A2459F48C00A9FD34 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF5792459F48C00A9FD34 /* User.swift */; };
 		554BF57C245A034000A9FD34 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BF57B245A034000A9FD34 /* CurrentUser.swift */; };
@@ -77,6 +78,7 @@
 		5534874E245A6A2300245E52 /* CreateChallengeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChallengeDetailsViewController.swift; sourceTree = "<group>"; };
 		55348750245A6A3100245E52 /* JoinChallengeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinChallengeDetailsViewController.swift; sourceTree = "<group>"; };
 		5542A76B245B488600E4E568 /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		5542A76D245BB13C00E4E568 /* RandomDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomDataGenerator.swift; sourceTree = "<group>"; };
 		554BF5772459F27600A9FD34 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		554BF5792459F48C00A9FD34 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		554BF57B245A034000A9FD34 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				5513CDFC245983F1006B70BC /* Authentication.swift */,
 				554BF5772459F27600A9FD34 /* Database.swift */,
 				554BF5792459F48C00A9FD34 /* User.swift */,
+				5542A76D245BB13C00E4E568 /* RandomDataGenerator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				5534874F245A6A2300245E52 /* CreateChallengeDetailsViewController.swift in Sources */,
 				550A2C9C24596A050061416F /* SignUpViewController.swift in Sources */,
 				5542A76C245B488600E4E568 /* Challenge.swift in Sources */,
+				5542A76E245BB13C00E4E568 /* RandomDataGenerator.swift in Sources */,
 				550A2CA024596B0C0061416F /* JoinChallengeViewController.swift in Sources */,
 				5503CBFE2459616000935DE6 /* SceneDelegate.swift in Sources */,
 				55348751245A6A3100245E52 /* JoinChallengeDetailsViewController.swift in Sources */,

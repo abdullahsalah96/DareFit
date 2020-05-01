@@ -13,7 +13,7 @@ class Authentication{
         return passwordCheck.evaluate(with: password)
     }
     
-    class func signUp(firstName: String, lastName: String, email:String, password:String, completion: @escaping (String?)->Void){
+    class func signUp(firstName: String, lastName: String, email:String, password:String, url: String, long: Double, lat: Double, completion: @escaping (String?)->Void){
         Auth.auth().createUser(withEmail: email, password: password, completion: {
             (authResults, errorResponse) in
             guard errorResponse == nil else{
@@ -27,8 +27,9 @@ class Authentication{
                 "firstName":firstName,
                 "lastName": lastName,
                 "uid":authResults!.user.uid,
-                "longitude": 0,
-                "latitude": 0
+                "longitude": long,
+                "latitude": lat,
+                "url": url
             ]) { (error) in
                 if error != nil{
                     //show error message
@@ -53,8 +54,11 @@ class Authentication{
                 }
                 return
             }
-            DispatchQueue.main.async {
-                completion(nil)
+            if let uid = authResults?.user.uid{
+                //found user
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             }
         }
     }
@@ -86,9 +90,10 @@ class Authentication{
             let doc = querySnapshot!.documents[0]
             CurrentUser.currentUser.uid = doc.data()["uid"] as! String
             CurrentUser.currentUser.firstName = doc.data()["firstName"] as! String
-            CurrentUser.currentUser.lastName = doc.data()["firstName"] as! String
+            CurrentUser.currentUser.lastName = doc.data()["lastName"] as! String
             CurrentUser.currentUser.longitude = doc.data()["longitude"] as! Double
             CurrentUser.currentUser.latitude = doc.data()["latitude"] as! Double
+            CurrentUser.currentUser.url = doc.data()["url"] as! String
             DispatchQueue.main.async {
                 completion(nil)
             }
