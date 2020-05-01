@@ -33,4 +33,4 @@ The application consists of 6 view controllers:
   <img src="docs/JoinChallengeDetails.png" width="200" height="400">
 </p>
 
-DareFit uitilizes Apple MapKit, Firebase Authentication and Firebase Firestore Database to povide these features.
+DareFit uitilizes Apple MapKit, Firebase Authentication and Firebase Firestore Database to povide these features. The Application UI was designed using Adobe XD.
